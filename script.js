@@ -1,37 +1,40 @@
 // Función para encriptar el texto
 function encryptText() {
-    let text = document.getElementById("inputText").value.trim();
-    if (!text) {
-        alert("Ingrese un texto para encriptar.");
-        return;
+    let text = document.getElementById("inputText").value;
+    if (validateInput(text)) {
+        let encryptedText = text.replace(/e/g, "enter")
+                                .replace(/i/g, "imes")
+                                .replace(/a/g, "ai")
+                                .replace(/o/g, "ober")
+                                .replace(/u/g, "ufat");
+        document.getElementById("resultText").innerHTML = `<p>${encryptedText}</p>`;
+        toggleCopyButton(encryptedText);
     }
-
-    let encryptedText = text.replace(/e/g, "enter")
-                            .replace(/i/g, "imes")
-                            .replace(/a/g, "ai")
-                            .replace(/o/g, "ober")
-                            .replace(/u/g, "ufat");
-
-    document.getElementById("resultText").innerHTML = `<p>${encryptedText}</p>`;
-    toggleCopyButton(encryptedText);
 }
 
 // Función para desencriptar el texto
 function decryptText() {
-    let text = document.getElementById("inputText").value.trim();
-    if (!text) {
-        alert("Ingrese un texto para desencriptar.");
-        return;
+    let text = document.getElementById("inputText").value;
+    if (validateInput(text)) {
+        let decryptedText = text.replace(/enter/g, "e")
+                                .replace(/imes/g, "i")
+                                .replace(/ai/g, "a")
+                                .replace(/ober/g, "o")
+                                .replace(/ufat/g, "u");
+        document.getElementById("resultText").innerHTML = `<p>${decryptedText}</p>`;
+        toggleCopyButton(decryptedText);
     }
+}
 
-    let decryptedText = text.replace(/enter/g, "e")
-                            .replace(/imes/g, "i")
-                            .replace(/ai/g, "a")
-                            .replace(/ober/g, "o")
-                            .replace(/ufat/g, "u");
-
-    document.getElementById("resultText").innerHTML = `<p>${decryptedText}</p>`;
-    toggleCopyButton(decryptedText);
+// Función para validar el texto ingresado
+function validateInput(text) {
+    const lowercaseText = text.toLowerCase();
+    const accentsPattern = /[áéíóúüÁÉÍÓÚÜ]/g;
+    if (text !== lowercaseText || accentsPattern.test(text)) {
+        alert("Solo letras minúsculas y sin acentos serán aceptadas.");
+        return false;
+    }
+    return true;
 }
 
 // Función para copiar el texto al portapapeles
