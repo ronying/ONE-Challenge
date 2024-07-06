@@ -6,7 +6,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .container {
@@ -16,13 +16,18 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 80%;
+    width: 90%;
     max-width: 1200px;
+    margin: 20px;
 }
 
 .input-section, .output-section {
     padding: 20px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .input-section {
@@ -32,28 +37,31 @@ body {
 
 .user-image {
     display: block;
-    margin: 0 auto 20px;
-    max-width: 100%;
+    margin: 0 0 20px 0;
+    max-width: 80%;
     height: auto;
+    filter: hue-rotate(190deg);
 }
 
 textarea {
     width: 100%;
     height: 150px;
     padding: 10px;
-    border: none; /* Eliminar bordes */
+    border: none;
     border-radius: 4px;
     font-size: 1em;
-    resize: none; /* Evita que la caja sea expandible */
-    background: transparent; /* Hace la caja transparente */
-    outline: none; /* Eliminar el borde del foco */
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* Añadir una sombra interior para mejor visibilidad */
+    resize: none;
+    background-color: transparent;
+    color: #007bff;
+    outline: none;
+    box-shadow: none;
 }
 
 .options {
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
 .warning {
@@ -62,6 +70,7 @@ textarea {
     margin-bottom: 10px;
     display: block;
     text-align: left;
+    width: 100%;
 }
 
 button {
@@ -71,6 +80,9 @@ button {
     cursor: pointer;
     font-size: 1em;
     margin-left: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    transition: opacity 0.3s;
 }
 
 button:hover {
@@ -128,4 +140,49 @@ button:hover {
 button:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .input-section, .output-section {
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .user-image {
+        max-width: 60%;
+    }
+
+    .options {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-image {
+        max-width: 50%;
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    .warning {
+        font-size: 0.7em;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
 }
