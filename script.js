@@ -1,7 +1,12 @@
 // Función para encriptar el texto
 function encryptText() {
     let text = document.getElementById("inputText").value;
-    if (validateInput(text)) {
+    if (text.trim() === "") {
+        showInitialMessage();
+    } else if (!validateInput(text)) {
+        showInitialMessage();
+        alert("Caracter inválido. Solo letras minúsculas y sin acentos serán aceptadas.");
+    } else {
         let encryptedText = text.replace(/e/g, "enter")
                                 .replace(/i/g, "imes")
                                 .replace(/a/g, "ai")
@@ -15,7 +20,12 @@ function encryptText() {
 // Función para desencriptar el texto
 function decryptText() {
     let text = document.getElementById("inputText").value;
-    if (validateInput(text)) {
+    if (text.trim() === "") {
+        showInitialMessage();
+    } else if (!validateInput(text)) {
+        showInitialMessage();
+        alert("Caracter inválido. Solo letras minúsculas y sin acentos serán aceptadas.");
+    } else {
         let decryptedText = text.replace(/enter/g, "e")
                                 .replace(/imes/g, "i")
                                 .replace(/ai/g, "a")
@@ -29,9 +39,8 @@ function decryptText() {
 // Función para validar el texto ingresado
 function validateInput(text) {
     const lowercaseText = text.toLowerCase();
-    const accentsPattern = /[áéíóúüÁÉÍÓÚÜ]/g;
-    if (text !== lowercaseText || accentsPattern.test(text)) {
-        alert("Solo letras minúsculas y sin acentos serán aceptadas.");
+    const specialCharsPattern = /[^a-z\s]/g; // Permitir solo letras minúsculas y espacios
+    if (text !== lowercaseText || specialCharsPattern.test(text)) {
         return false;
     }
     return true;
@@ -60,6 +69,16 @@ function toggleCopyButton(text) {
     } else {
         copyButton.style.display = "block";
     }
+}
+
+// Función para mostrar el mensaje inicial
+function showInitialMessage() {
+    document.getElementById("resultText").innerHTML = `
+        <img src="image/dibujo.png" alt="Imagen de ejemplo">
+        <p>Ningún mensaje fue encontrado</p>
+        <p>Ingresa el texto que desees encriptar o desencriptar.</p>
+    `;
+    toggleCopyButton("");
 }
 
 // Inicializar el botón de copiar como oculto al cargar la página
